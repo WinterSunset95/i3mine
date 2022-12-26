@@ -1,0 +1,20 @@
+#!/bin/bash
+
+
+
+
+count=0
+public_ip=$(curl ifconfig.me)
+local_ip=$(ip address show | awk '/inet/' | awk 'NR==3 {print $2}')
+
+while [[ true ]]; do
+	count=$(expr $count + 1)
+	if [[ count -ge 600 ]]; then
+		public_ip=$(curl ifconfig.me)
+		local_ip=$(ip address show | awk '/inet/' | awk 'NR==3 {print $2}')
+		count=0
+	fi
+	date=$(date)
+	echo "Local IP $local_ip | Public IP - $public_ip | $date"
+	sleep 1
+done
