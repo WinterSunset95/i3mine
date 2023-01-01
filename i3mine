@@ -26,7 +26,7 @@ while [[ true ]]; do
 	if [[ -z "$local_ip" ]]; then
 		echo "$battery% $bat_status | RAM $memused% | No Internet | $date "
 	else
-		echo "$battery% $bat_status | RAM $memused% | IPv4 - $local_ip | PublicIP - $public_ip | $date "
+		echo "[ $battery% $bat_status ] [ RAM $memused% ] [ IPv4 - $local_ip ] [ PublicIP - $public_ip ] [ $date ] "
 	fi
 	sleep 1
 done
