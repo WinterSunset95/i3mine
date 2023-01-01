@@ -19,7 +19,7 @@ fn get_local_ip() -> String {
         .arg("show")
         .output()
         .expect("Error running command");
-    let string = String::from_utf8(ip.stdout).expect("Error converting");
+    let mut string = String::from_utf8(ip.stdout).expect("Error converting");
     string
 }
 
