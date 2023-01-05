@@ -11,8 +11,8 @@ memtotal=$(cat /proc/meminfo | awk 'tolower($0) ~ /memtotal/' | awk '{print $2 /
 while [[ true ]]; do
 	count=$(expr $count + 1)
 	local_ip=$(ip address show | awk '/inet/' | awk 'NR==3 {print $2}')
-	memavailble=$(cat /proc/meminfo | awk 'tolower($0) ~ /memavailable/' | awk '{print $2/1024/1024}')
-	memused=$(echo $memtotal $memavailble | awk '{print (($1-$2)/$1)*100}' | awk '{split($1,a,"."); print a[1]}')
+	memfree=$(cat /proc/meminfo | awk 'tolower($0) ~ /memfree/' | awk '{print $2/1024/1024}')
+	memused=$(echo $memtotal $memfree | awk '{print (($1-$2)/$1)*100}' | awk '{split($1,a,"."); print a[1]}')
 	bat_status=$(cat /sys/class/power_supply/BAT0/status)
 	battery=$(cat /sys/class/power_supply/BAT0/capacity)
 	if [[ $(($count%5)) -eq 0 ]]; then
